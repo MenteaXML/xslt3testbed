@@ -3,7 +3,7 @@ xslt3testbed
 
 Testbed for trying out XSLT 3.0 (http://www.w3.org/TR/xslt-30/) techniques.
 
-Since few people have much (or any) experience using XSLT 3.0 on more than toy examples, this is a public, medium-sized XSLT 3.0 project where people could try out new XSLT 3.0 features on the transformations to (X)HTML(5) and XSL-FO that are what we do most often and, along the way, maybe come up with new design patterns for doing transformations using the higher-order functions and partial function application that XSLT 3.0 gives us.
+Since few people have much (or any) experience using XSLT 3.0 on more than toy examples, this is a public, medium-sized XSLT 3.0 project where people could try out new XSLT 3.0 features on the transformations to (X)HTML(5) and XSL-FO that are what we do most often and, along the way, maybe come up with new design patterns for doing transformations using the higher-order functions, partial function application, and other goodies that XSLT 3.0 gives us.
 
 ## JATS Preview Stylesheets
 
@@ -11,7 +11,7 @@ This XSLT 3.0 testbed is based on the XSLT 1.0 "NISO Journal Article Tag Suite (
 
 JATS is good project for this since:
 
-- JATS is the medium of exchange, and of archiving, for published scientific journal articles (and more)
+- JATS is in wide use as the medium of exchange, and of archiving, for published scientific journal articles (and more)
 - It has the Goldilocks factor of not being too large (it's not as large as DocBook or TEI) nor too small (it's also not a toy)
 - There's lots of sample data available
 - There's existing XSLT 1.0 stylesheets
@@ -20,7 +20,7 @@ JATS is good project for this since:
 
 ## Goals
 
-- Trial - and make prior art - for different techniques for using XSLT 3.0
+- Trial - and make prior art for - different techniques for using XSLT 3.0
 - Get an early start for developing the patterns and idioms for using XSLT 3.0 that many of us will be using for years to come
 - Standalone XSLT 3.0 `xsl:package` for transforming XHTML tables to XSL-FO and/or HTML
  - `xsl:package` is new in XSLT 3.0
@@ -63,7 +63,7 @@ There's undoubtedly many things to try out, but a starter list of things to look
 
 - The National Library of Medicine (NLM) published the original "NISO Journal Article Tag Suite (JATS) version 1.0" stylesheets
 - Mentea (http://www.mentea.net/) started the testbed.
-- Contributors will be acknowledged here, too
+- Collaborators and contributors will be acknowledged here, too
 
 ## License
 
