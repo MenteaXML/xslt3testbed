@@ -3,13 +3,13 @@ xslt3testbed
 
 Testbed for trying out XSLT 3.0 (http://www.w3.org/TR/xslt-30/) techniques.
 
-Since few people have much (or any) experience using XSLT 3.0 on more than toy examples, this is a public, medium-sized XSLT 3.0 project where people could try out new XSLT 3.0 features on the transformations to (X)HTML(5) and XSL-FO that are what we do most often and, along the way, maybe come up with new design patterns for doing transformations using the higher-order functions, partial function application, and other goodies that XSLT 3.0 gives us.
+Since few people yet have much (or any) experience using XSLT 3.0 on more than toy examples, this is a public, medium-sized XSLT 3.0 project where people could try out new XSLT 3.0 features on the transformations to (X)HTML(5) and XSL-FO that are what we do most often and, along the way, maybe come up with new design patterns for doing transformations using the higher-order functions, partial function application, and other goodies that XSLT 3.0 gives us.
 
 ## JATS Preview Stylesheets
 
-This XSLT 3.0 testbed is based on the XSLT 1.0 "NISO Journal Article Tag Suite (JATS) version 1.0" stylesheets from https://github.com/NCBITools/JATSPreviewStylesheets
+The XSLT 3.0 testbed stylesheets are derived from the XSLT 1.0 "NISO Journal Article Tag Suite (JATS) version 1.0" stylesheets from https://github.com/NCBITools/JATSPreviewStylesheets
 
-JATS is good project for this since:
+The JATS preview stylesheets made a good place to start since:
 
 - JATS is in wide use as the medium of exchange, and of archiving, for published scientific journal articles (and more)
 - It has the Goldilocks factor of not being too large (it's not as large as DocBook or TEI) nor too small (it's also not a toy)
@@ -57,11 +57,11 @@ There's undoubtedly many things to try out, but a starter list of things to look
  - Customise the output?
  - Modularise stylesheets?
  - Re-use modules between HTML and XSL-FO output?
-- Will higher-order functions, anonymous function, partial function application, and/or dynamic XPath evaluation improve upon xsl:attribute-set?
+- Will higher-order functions, anonymous function, partial function application, and/or dynamic XPath evaluation improve upon `xsl:attribute-set`?
 
 ## Acknowledgements
 
-- The National Library of Medicine (NLM) published the original "NISO Journal Article Tag Suite (JATS) version 1.0" stylesheets
+- The National Library of Medicine (NLM) published the original "NISO Journal Article Tag Suite (JATS) version 1.0" stylesheets, but neither this project nor Mentea has any affiliation with NLM
 - Mentea (http://www.mentea.net/) started the testbed.
 - Collaborators and contributors will be acknowledged here, too
 
