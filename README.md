@@ -59,6 +59,16 @@ There's undoubtedly many things to try out, but a starter list of things to look
  - Re-use modules between HTML and XSL-FO output?
 - Will higher-order functions, anonymous function, partial function application, and/or dynamic XPath evaluation improve upon xsl:attribute-set?
 
+## Manifest
+
+- `LICENSE` - Just so you know that it's public domain
+- `README.md` - This file
+- `fo` - XSL-FO files generated from XML in `xml`
+- `html` - HTML filse generated from XML in `xml`
+- `jats` - Original JATS processing files, included for reference
+- `xml` - XML source files.  Each source file and any associated graphics, etc., is in a separate subdirectory
+- `xslt` - XSLT 3.0 stylesheets
+
 ## Acknowledgements
 
 - The National Library of Medicine (NLM) published the original "NISO Journal Article Tag Suite (JATS) version 1.0" stylesheets
