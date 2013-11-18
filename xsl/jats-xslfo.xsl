@@ -70,30 +70,32 @@
 <!--                                                               -->
 <!--  CREATED FOR:                                                 -->
 <!--             Digital Archive of Journal Articles               -->
-  <!--             National Center for Biotechnology Information (NCBI)     -->
-  <!--             National Library of Medicine (NLM)                -->
+<!--             National Center for Biotechnology Information (NCBI)     -->
+<!--             National Library of Medicine (NLM)                -->
 <!--                                                               -->
 <!--  CREATED BY:                                                  -->
 <!--             Wendell Piez (based on PDF design by              -->
 <!--             Kate Hamilton and Debbie Lapeyre, 2004),          -->
 <!--             Mulberry Technologies, Inc.                       -->
 <!--                                                               -->
-  
-  <!-- ============================================================= -->
-  <!-- 
-    This work is in the public domain and may be reproduced, published or 
-    otherwise used without the permission of the National Library of Medicine (NLM).
-    
+
+<!-- ============================================================= -->
+<!--
+    This work is in the public domain and may be reproduced, published
+    or otherwise used without the permission of the National Library
+    of Medicine (NLM).
+
     We request only that the NLM is cited as the source of the work.
-    
-    Although all reasonable efforts have been taken to ensure the accuracy and 
-    reliability of the software and data, the NLM and the U.S. Government  do 
-    not and cannot warrant the performance or results that may be obtained  by
-    using this software or data. The NLM and the U.S. Government disclaim all 
-    warranties, express or implied, including warranties of performance, 
-    merchantability or fitness for any particular purpose.
-  -->
-  <!-- ============================================================= -->
+
+    Although all reasonable efforts have been taken to ensure the
+    accuracy and reliability of the software and data, the NLM and the
+    U.S. Government do not and cannot warrant the performance or
+    results that may be obtained by using this software or data. The
+    NLM and the U.S. Government disclaim all warranties, express or
+    implied, including warranties of performance, merchantability or
+    fitness for any particular purpose.
+-->
+<!-- ============================================================= -->
 
 <!-- ============================================================= -->
 <!--             CHANGE HISTORY                                    -->
@@ -144,18 +146,18 @@ Added support for @pub-id-type='arXiv'
 
 Fixed a few miscellaneous bugs
 
-  
+
 CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
   3. In template matching 'fn-group/fn | author-notes/fn' in
    'label-text' mode, added conditional to declaration of variable
-   'auto-number-fn' setting to false() when the fn has its own 
+   'auto-number-fn' setting to false() when the fn has its own
    label or @symbol (irrespective of the content of xref elements)
 
  2. Significant improvement to the logic of template 'fn-xref'
     determining when to create a footnote, vs. only a reference
 
- 1. Added priority '2' to 'main-title' template to avoid match 
+ 1. Added priority '2' to 'main-title' template to avoid match
     clashes with 'section-title' template over "notes/title"
     (which can also match "back[not(title)]/*/title")
 
@@ -171,33 +173,26 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
      stylesheet. -->
 
 
-  <!-- These affect the operation of the stylesheet as a whole. They
-     can be overridden at runtime, if desired (use an empty
-     string for a false() value), or (better) by an importing
-     stylesheet. -->
+<xsl:param name="mathml-support" select="true()"/>
+<!-- If mathml-support is turned off, MathML will be removed from the
+     output (while its content is passed through). This allows the
+     stylesheet to be used with an XSL-FO engine that does not support
+     MathML (while also disabling MathML, of course -->
 
 
-  <xsl:param name="mathml-support" select="true()"/>
-  <!-- If mathml-support is turned off, MathML will be removed from
-       the output (while its content is passed through). This allows
-       the stylesheet to be used with an XSL-FO engine that does not
-       support MathML (while also disabling MathML, of course -->
-
-
-  <xsl:param name="base-dir" select="false()"/>
-  <!-- base-dir specifies the base directory used to evaluate
-       relative URIs. If this is left as the default, the 
-       formatter will guess as to where graphics are located when 
-       relative paths are given.
+<xsl:param name="base-dir" select="false()"/>
+<!-- base-dir specifies the base directory used to evaluate relative
+     URIs. If this is left as the default, the formatter will guess as
+     to where graphics are located when relative paths are given.
 
     For example:
-    
+
     A graphic has <graphic xlink:href="images/babypic.jpg"/>
     base-dir is provided as 'file:///c:/Projects/NLM-data'
     The graphic should be found at
       file:///c:/Projects/NLM-data/images/babypic.jpg
 
-  -->
+-->
 
 <!-- ============================================================= -->
 <!-- KEYS FOR ID AND RID                                           -->
@@ -231,8 +226,6 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
      paragraph text and the like. -->
 <xsl:variable name="textleading" select="'12pt'"/>
 <!-- points -->
-
-
 
 
 <!-- ============================================================= -->
@@ -666,7 +659,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
   <!-- Populate the content sequence -->
   <fo:page-sequence master-reference="content-sequence"
     initial-page-number="1">
-    
+
     <fo:static-content flow-name="recto-header">
       <fo:block xsl:use-attribute-sets="page-header">
         <xsl:call-template name="make-page-header">
@@ -689,15 +682,15 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
         <!-- set the article opener, body, and backmatter -->
         <xsl:call-template name="set-article-opener"/>
-       
+
         <xsl:call-template name="set-article"/>
-        
+
       </fo:block>
-      
+
     </fo:flow>
   </fo:page-sequence>
 
-  <!-- produce document diagnostics after the end of 
+  <!-- produce document diagnostics after the end of
        the article; this has a page sequence in it
        and all else needed -->
     <xsl:call-template name="run-diagnostics"/>
@@ -722,7 +715,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
     </fo:repeatable-page-master-alternatives>
   </fo:page-sequence-master>
 
-  <!-- content-sequence master is:  
+  <!-- content-sequence master is:
      first, (verso, recto)+ -->
   <fo:page-sequence-master master-name="content-sequence">
     <fo:single-page-master-reference master-reference="first"/>
@@ -734,7 +727,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
     </fo:repeatable-page-master-alternatives>
   </fo:page-sequence-master>
 
-  <!-- diagnostics-sequence master is: 
+  <!-- diagnostics-sequence master is:
        (recto, verso)+ -->
   <fo:page-sequence-master master-name="diagnostics-sequence">
     <fo:repeatable-page-master-alternatives>
@@ -942,7 +935,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
         <xsl:apply-templates mode="metadata" select="product"/>
 
-        <!-- 
+        <!--
           Handled in template "set-copyright-note"
           <xsl:apply-templates mode="metadata" select="permissions"/>
           -->
@@ -973,7 +966,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
         <!-- only in 2.3 -->
         <xsl:apply-templates mode="metadata" select="contract-num | contract-sponsor |
           grant-num | grant-sponsor"/>
-        
+
         <xsl:apply-templates mode="metadata" select="funding-group/*"/>
         <!-- includes (award-group*, funding-statement*,
                    open-access?) -->
@@ -985,9 +978,9 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
 
 <xsl:template name="set-article">
-  
+
   <xsl:apply-templates select="/article/body"/>
-  
+
   <xsl:apply-templates select="/article/back"/>
 
   <!-- floats-wrap is in NLM 2.3 -->
@@ -1020,7 +1013,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:call-template name="banner-rule"/>
     </xsl:if>
     <xsl:apply-templates select="$abstracts"/>
-    
+
     <!-- then a rule before the article body -->
     <xsl:call-template name="banner-rule"/>
 
@@ -1163,7 +1156,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
   <xsl:template match="contrib-group" mode="metadata">
     <!-- content model of contrib-group:
-        (contrib+, 
+        (contrib+,
          (address | aff | author-comment | bio | email |
           ext-link | on-behalf-of | role | uri | xref)*) -->
     <!-- each contrib makes a row: name at left, details at right -->
@@ -1174,7 +1167,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:with-param>
       <xsl:with-param name="contents">
         <xsl:for-each select="contrib">
-          <!-- content model of contrib: 
+          <!-- content model of contrib:
           ((anonymous | collab | collab-alternatives | name | name-alternatives)*,
           (degrees)*, (address | aff | aff-alternatives | author-comment | bio | email |
           ext-link | on-behalf-of | role | uri | xref)*) -->
@@ -1202,7 +1195,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
   <xsl:template match="journal-meta/aff-alternatives" mode="metadata">
     <xsl:call-template name="metadata-area-cell">
       <xsl:with-param name="label">
@@ -1226,7 +1219,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
   <xsl:template match="issn" mode="metadata">
     <xsl:call-template name="metadata-labeled-entry-cell">
       <xsl:with-param name="label">
@@ -1235,7 +1228,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
   <xsl:template match="issn-l" mode="metadata">
     <xsl:call-template name="metadata-labeled-entry-cell">
       <xsl:with-param name="label">
@@ -1244,8 +1237,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
-  
+
+
 <xsl:template match="isbn" mode="metadata">
   <xsl:call-template name="metadata-labeled-entry-cell">
     <xsl:with-param name="label">
@@ -1563,8 +1556,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
 <xsl:template match="conference" mode="metadata">
   <!-- content model:
-    (conf-date, 
-     (conf-name | conf-acronym)+, 
+    (conf-date,
+     (conf-name | conf-acronym)+,
      conf-num?, conf-loc?, conf-sponsor*, conf-theme?) -->
   <xsl:choose>
     <xsl:when
@@ -1708,28 +1701,28 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:with-param name="label">Contract</xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
   <xsl:template match="contract-sponsor" mode="metadata">
     <!-- only in 2.3 -->
     <xsl:call-template name="metadata-labeled-entry-cell">
       <xsl:with-param name="label">Contract Sponsor</xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
   <xsl:template match="grant-num" mode="metadata">
     <!-- only in 2.3 -->
     <xsl:call-template name="metadata-labeled-entry-cell">
       <xsl:with-param name="label">Grant Number</xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
   <xsl:template match="grant-sponsor" mode="metadata">
     <!-- only in 2.3 -->
     <xsl:call-template name="metadata-labeled-entry-cell">
       <xsl:with-param name="label">Grant Sponsor</xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
 <xsl:template match="award-group" mode="metadata">
   <!-- includes (funding-source*, award-id*, principal-award-recipient*, principal-investigator*) -->
   <xsl:apply-templates mode="metadata"/>
@@ -1862,7 +1855,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  
+
 <xsl:template match="compound-kwd" mode="metadata">
   <xsl:call-template name="metadata-block">
     <xsl:with-param name="label">Compound keyword</xsl:with-param>
@@ -1939,8 +1932,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
     </xsl:for-each></xsl:template>
 
   <xsl:template match="fig-count" mode="metadata-label">Figures</xsl:template>
-  
-  
+
+
   <xsl:template match="table-count" mode="metadata-label">Tables</xsl:template>
 
 
@@ -2086,7 +2079,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
 
 <xsl:template name="set-copyright-note">
-  <!-- This note is set as a first-page footnote, 
+  <!-- This note is set as a first-page footnote,
        and has no number or other device.
        The context node is /article/front/article-meta -->
   <xsl:call-template name="make-footnote">
@@ -2097,7 +2090,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:if>
       <xsl:apply-templates select="permissions"/>
     </xsl:with-param>
-  </xsl:call-template>   
+  </xsl:call-template>
 </xsl:template>
 
 
@@ -2152,14 +2145,14 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
 <xsl:template match="contrib-group">
   <!-- content model of contrib-group:
-        (contrib+, 
+        (contrib+,
          (address | aff | author-comment | bio | email |
           ext-link | on-behalf-of | role | uri | xref)*) -->
   <!-- each contrib makes a row: name at left, details at right -->
   <fo:table>
     <fo:table-body>
       <xsl:for-each select="contrib">
-        <!-- content model of contrib: 
+        <!-- content model of contrib:
           ((anonymous | collab | collab-alternatives | name | name-alternatives)*,
            (degrees)*, (address | aff | author-comment | bio | email |
                        ext-link | on-behalf-of | role | uri | xref)*) -->
@@ -2237,7 +2230,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:call-template>
     </fo:block>
   </xsl:template>
-  
+
   <xsl:template match="collab-alternatives/*" mode="contrib">
     <fo:block>
       <xsl:apply-templates/>
@@ -2250,7 +2243,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:call-template>
     </fo:block>
   </xsl:template>
-  
+
 
   <xsl:template match="contrib/name" mode="contrib">
     <fo:block>
@@ -2264,8 +2257,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:call-template>
     </fo:block>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="contrib/name-alternatives/name" mode="contrib">
     <fo:block>
       <!-- (surname, given-names?, prefix?, suffix?) -->
@@ -2279,7 +2272,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:call-template>
     </fo:block>
   </xsl:template>
-  
+
   <xsl:template match="contrib/name-alternatives/string-name" mode="contrib">
     <fo:block>
       <xsl:apply-templates select="."/>
@@ -2292,8 +2285,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:call-template>
     </fo:block>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="contrib/name-alternatives/string-name" mode="contrib">
     <fo:block>
       <!-- (surname, given-names?, prefix?, suffix?) -->
@@ -2307,8 +2300,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:call-template>
     </fo:block>
   </xsl:template>
-  
-  
+
+
   <xsl:template name="contrib-amend">
   <!-- the context will be a contrib/anonymous, contrib/collab,
        contrib/collab-alternatives/collab, contrib/name, or
@@ -2321,7 +2314,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
     <xsl:variable name="last-in-contrib"
       select="generate-id() = generate-id(
       ($contrib/anonymous | $contrib/collab | $contrib/collab-alternatives/collab |
-       $contrib/name | $contrib/name-alternatives/*)[last()] )"/>    
+       $contrib/name | $contrib/name-alternatives/*)[last()] )"/>
     <xsl:if test="$last-in-contrib">
       <xsl:apply-templates select="$contrib/degrees | $contrib/xref" mode="contrib"/>
       <xsl:if test="$last-contrib">
@@ -2340,7 +2333,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
   <xsl:template match="xref" mode="contrib">
     <xsl:apply-templates select="."/>
   </xsl:template>
-  
+
   <!-- inside journal-meta/contrib-group, xref elements don't
        generate footnotes -->
   <xsl:template match="journal-meta/contrib-group//xref" mode="contrib">
@@ -2350,7 +2343,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:apply-templates/>
     </fo:inline>
   </xsl:template>
-  
+
   <xsl:template match="contrib-id" mode="contrib">
   <xsl:text> [</xsl:text>
   <xsl:apply-templates/>
@@ -2380,7 +2373,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
   <!-- when we have an addr-line we generate an unlabelled block -->
   <fo:block xsl:use-attribute-sets="address">
       <xsl:apply-templates/>
-  </fo:block>   
+  </fo:block>
 </xsl:template>
 
 
@@ -2922,7 +2915,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
          when they appear outside the named elements -->
     <xsl:with-param name="allow-float"
       select="$allow-float and
-              not(ancestor::boxed-text | 
+              not(ancestor::boxed-text |
                   ancestor::chem-struct-wrap |
                   ancestor::chem-struct-wrapper |
                   ancestor::disp-formula |
@@ -2998,7 +2991,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 </xsl:template>
 
 
-<!-- floating objects include 
+<!-- floating objects include
    boxed-text, chem-struct-wrap, fig, fig-group, graphic,
    media, preformat, supplementary-material, table-wrap,
    table-wrap-group -->
@@ -3163,10 +3156,10 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
     <xsl:with-param name="allow-float"
       select="$allow-float and
         not(ancestor::bio | ancestor::boxed-text | ancestor::chem-struct |
-            ancestor::chem-struct-wrap | ancestor::chem-struct-wrapper | 
-            ancestor::disp-formula |  ancestor::disp-quote | 
+            ancestor::chem-struct-wrap | ancestor::chem-struct-wrapper |
+            ancestor::disp-formula |  ancestor::disp-quote |
             ancestor::fig | ancestor::glossary | ancestor::gloss-group |
-            ancestor::supplementary-material | 
+            ancestor::supplementary-material |
             ancestor::disp-formula | ancestor::table-wrap)"/>
     <xsl:with-param name="contents">
       <fo:block-container xsl:use-attribute-sets="preformat-box">
@@ -3433,7 +3426,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="addr-line | country | fax | 
+<xsl:template match="addr-line | country | fax |
                        institution | phone">
   <xsl:if test="preceding-sibling::*">
     <xsl:text> </xsl:text>
@@ -3461,9 +3454,9 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
 <xsl:template
   match="article-meta/email | contrib-group/email |
-                contrib/email | array/email | 
+                contrib/email | array/email |
                 chem-struct-wrap/email | chem-struct-wrapper/email |
-                fig-group/email | 
+                fig-group/email |
                 fig/email | graphic/email | media/email |
                 supplementary-material/email |
                 table-wrap-group/email | table-wrap/email |
@@ -3651,8 +3644,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 <!-- ============================================================= -->
 
 <xsl:template match="back">
-  <!-- content model for back: 
-        (label?, title*, 
+  <!-- content model for back:
+        (label?, title*,
         (ack | app-group | bio | fn-group | glossary | ref-list |
         notes | sec)*) -->
   <fo:block xsl:use-attribute-sets="back">
@@ -3808,7 +3801,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
 
 <xsl:template match="*" mode="floats">
-  <!-- floats are rendered in place unless they are both 
+  <!-- floats are rendered in place unless they are both
        cross-referenced somewhere by an xref, and they have
        do not have @position != "float", in which case
        they have been floated to near the point of the xref -->
@@ -3821,10 +3814,10 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
        </xsl:apply-templates>
      </xsl:otherwise>
   </xsl:choose>
-  
+
 </xsl:template>
 
-    
+
 <!-- ============================================================= -->
 <!-- Citation content                                              -->
 <!-- ============================================================= -->
@@ -3834,13 +3827,13 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 <xsl:template match="citation-alternatives">
   <xsl:apply-templates/>
 </xsl:template>
-  
+
 <xsl:template match="mixed-citation | element-citation |
                      nlm-citation | related-article |
                      related-object | product | citation">
   <!-- citation is in v2.3 -->
   <fo:block xsl:use-attribute-sets="citation">
-    <xsl:apply-templates/>    
+    <xsl:apply-templates/>
   </fo:block>
 </xsl:template>
 
@@ -3874,7 +3867,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 <!-- ============================================================= -->
 <!-- Cross-references are passed through except when they
    have no content, in which case:
-   
+
    1. if they point to an fn-group/fn, or to an fn that appears
       before them, they acquire the footnote label
    2. if not, they acquire the label of the element to which they
@@ -3888,14 +3881,14 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:apply-templates/>
     </fo:block>
   </xsl:template>
-  
+
   <xsl:template match="table-wrap-foot//fn">
     <fo:block xsl:use-attribute-sets="footnote-body">
       <xsl:apply-templates/>
     </fo:block>
   </xsl:template>
-  
-  
+
+
 <xsl:template match="fn">
   <!-- matching fn elements not inside fn-group or author-notes -->
   <xsl:variable name="xrefs" select="key('xref-by-rid',@id)"/>
@@ -3974,13 +3967,13 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
     <!-- We have only the reference if the fn target has a
          parent fn-group or table-wrap-foot (the footnote
          text appears at the point of the fn). -->
-    <xsl:when test="$target/parent::fn-group |   
+    <xsl:when test="$target/parent::fn-group |
                     $target[ancestor::table-wrap-foot]">
       <fo:inline xsl:use-attribute-sets="footnote-ref">
         <xsl:copy-of select="$symbol"/>
       </fo:inline>
     <!-- We have only the reference if the fn target is
-         inside article-meta (the footnote text appears 
+         inside article-meta (the footnote text appears
          elsewhere). -->
     </xsl:when>
     <xsl:when test="$target/ancestor::article-meta">
@@ -3998,7 +3991,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
         <xsl:copy-of select="$symbol"/>
       </fo:inline>
     </xsl:when>
-    <!-- Otherwise we get the reference and the footnote. --> 
+    <!-- Otherwise we get the reference and the footnote. -->
     <xsl:otherwise>
       <xsl:call-template name="make-footnote">
         <xsl:with-param name="symbol">
@@ -4038,7 +4031,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
         </xsl:choose>
       </fo:inline>
       <!-- now, if the target is directly inside floats-group,
-           does not have @position or @position='float', and 
+           does not have @position or @position='float', and
            this is the first xref to it, we grab it and place it here -->
       <xsl:if
         test="($target[not(@position != 'float')]
@@ -4349,7 +4342,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
      unlabeled in some cases but require autolabeling in others;
      these variables, in contrast, are intended to switch
      labelling for entire element classes. -->
-  
+
 <xsl:variable name="auto-label-app" select="false()"/>
 <xsl:variable name="auto-label-boxed-text" select="false()"/>
 <xsl:variable name="auto-label-chem-struct-wrap" select="false()"/>
@@ -4365,7 +4358,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 <xsl:variable name="auto-label-table-wrap" select="false()"/>
 
 <!--
-  The following (commented) variable assignments show how 
+  The following (commented) variable assignments show how
     autolabeling can be configured conditionally.
   For example: "label figures if no figures have labels" translates to
     "not(//fig[label])", which will resolve to Boolean true() when the set of
@@ -4396,7 +4389,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
      label. A warning will be generated only if $warning is
      true, $auto-label-x if false, and there is no label or
      @symbol available in the source document. -->
-  
+
 <xsl:template match="aff" mode="label-text">
   <xsl:param name="warning" select="false()"/>
   <xsl:variable name="empty-xrefs" select="key('xref-by-rid',(@id|parent::aff-alternatives/@id))
@@ -4488,7 +4481,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
        elsewhere in mode "label-text" -->
   <xsl:param name="warning" select="true()"/>
   <!-- autonumber all fn elements outside fn-group
-       author-notes and table-wrap only if none of them 
+       author-notes and table-wrap only if none of them
        have labels or @symbols (to keep numbering
        orderly) -->
   <xsl:variable name="in-scope-notes"
@@ -4752,7 +4745,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
   <xsl:call-template name="name-sequence"/>
 </xsl:template>
 
-  
+
 <xsl:template name="name-sequence">
   <!-- Given a list of name or collab elements, presents them in order
   with members after the first in parentheses -->
@@ -4776,7 +4769,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
   <xsl:apply-templates/>
 </xsl:template>
 
-  
+
 <!-- ============================================================= -->
 <!-- UTILITY TEMPLATES                                             -->
 <!-- ============================================================= -->
@@ -4859,8 +4852,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
     select="$allow-float and
             not(@position != 'float') and
             not(ancestor::*[@position][@position='float'])"/>
-  <!-- assuming $allow-float is true(), the test respects 
-         @position='float' as the default, and sets float to 'before' 
+  <!-- assuming $allow-float is true(), the test respects
+         @position='float' as the default, and sets float to 'before'
          but *only* if no ancestors with @position have a value of
          'float' -->
   <xsl:choose>
@@ -5016,7 +5009,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 </xsl:template>
 
 
-<!-- Template "item-mark" generates a bullet or number for a 
+<!-- Template "item-mark" generates a bullet or number for a
      list-item or to appear with a def-list/term -->
 
 <xsl:template name="item-mark">
@@ -5310,7 +5303,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:copy-of select="$xref-warnings"/>
     </fo:list-block>
   </xsl:if>
-  
+
   <xsl:variable name="alternatives-warnings">
     <!-- for reporting any element with a @specific-use different
            from a sibling -->
@@ -5348,7 +5341,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
         </fo:list-item-body>
       </fo:list-item>
     </xsl:for-each>
-  </xsl:variable> 
+  </xsl:variable>
     <xsl:if test="normalize-space(string($alternatives-warnings))">
       <xsl:call-template name="section-title">
         <xsl:with-param name="contents">
@@ -5411,7 +5404,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 <!-- ============================================================= -->
 <!-- An id can be derived for any element. If an @id is given,
      it is presumed unique and copied. If not, one is generated.   -->
-  
+
 <xsl:template name="assign-id">
   <xsl:variable name="id">
     <xsl:apply-templates select="." mode="id"/>
@@ -5442,7 +5435,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
   <!-- ============================================================= -->
   <!--  Utility templates for generating warnings and reports        -->
   <!-- ============================================================= -->
-  
+
   <!--  <xsl:template name="report-warning">
     <xsl:param name="when" select="false()"/>
     <xsl:param name="msg"/>
@@ -5452,8 +5445,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </xsl:message>
     </xsl:if>
   </xsl:template>-->
-  
-  
+
+
   <!--<xsl:template name="list-elements">
     <xsl:param name="elements" select="/.."/>
     <xsl:if test="$elements">
@@ -5466,8 +5459,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       </ol>
     </xsl:if>
   </xsl:template>-->
-  
-  
+
+
   <xsl:template match="*" mode="pattern">
     <xsl:value-of select="name(.)"/>
     <xsl:for-each select="@*">
@@ -5478,17 +5471,17 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:text>']</xsl:text>
     </xsl:for-each>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="node()" mode="xpath">
     <xsl:apply-templates mode="xpath" select=".."/>
     <xsl:apply-templates mode="xpath-step" select="."/>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="/" mode="xpath"/>
-  
-  
+
+
   <xsl:template match="*" mode="xpath-step">
     <xsl:variable name="name" select="name(.)"/>
     <xsl:text>/</xsl:text>
@@ -5499,14 +5492,14 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:text>]</xsl:text>
     </xsl:if>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="@*" mode="xpath-step">
     <xsl:text>/@</xsl:text>
     <xsl:value-of select="name(.)"/>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="comment()" mode="xpath-step">
     <xsl:text>/comment()</xsl:text>
     <xsl:if test="count(../comment()) > 1">
@@ -5515,8 +5508,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:text>]</xsl:text>
     </xsl:if>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="processing-instruction()" mode="xpath-step">
     <xsl:text>/processing-instruction()</xsl:text>
     <xsl:if test="count(../processing-instruction()) > 1">
@@ -5525,8 +5518,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:text>]</xsl:text>
     </xsl:if>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="text()" mode="xpath-step">
     <xsl:text>/text()</xsl:text>
     <xsl:if test="count(../text()) > 1">
@@ -5535,8 +5528,8 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
       <xsl:text>]</xsl:text>
     </xsl:if>
   </xsl:template>
-  
-  
+
+
 <!-- ============================================================= -->
 <!-- END OF STYLESHEET                                             -->
 <!-- ============================================================= -->
