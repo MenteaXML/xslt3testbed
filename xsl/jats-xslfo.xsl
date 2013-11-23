@@ -163,6 +163,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 
     ============================================================= -->
 
+<xsl:import href="xhtml-tables-fo3.xsl"/>
 
 <!-- ============================================================= -->
 <!-- TOP-LEVEL PARAMETERS                                          -->
@@ -3400,7 +3401,7 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
 <!-- ============================================================= -->
 
 
-<xsl:include href="xhtml-tables-fo.xsl"/>
+<!--<xsl:include href="xhtml-tables-fo.xsl"/>-->
 
 
 <!-- ============================================================= -->
