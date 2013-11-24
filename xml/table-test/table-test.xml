@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article
+  PUBLIC "-//NLM//DTD JATS (Z39.96) Article Authoring DTD v1.0 20120330//EN"
+  "JATS-articleauthoring.dtd">
+<article dtd-version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <front>
+    <article-meta>
+      <title-group>
+        <article-title>Table test</article-title>
+      </title-group>
+      <contrib-group>
+        <contrib>
+          <contrib-id/>
+          <name>
+            <surname>Graham</surname>
+            <given-names>Tony</given-names>
+          </name>
+          <aff>Mentea</aff>
+        </contrib>
+      </contrib-group>
+      <abstract>
+        <p>Test table handling</p>
+      </abstract>
+    </article-meta>
+  </front>
+  <body>
+    <p>
+      <table-wrap id="table1" position="float" xml:lang="">
+        <caption>
+          <title>1 head cell, 1 body cell.</title>
+        </caption>
+        <table>
+          <colgroup>
+            <col align="left" span="1"/>
+          </colgroup>
+          <thead>
+            <tr>
+              <td align="left" rowspan="1" colspan="1">Head</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" rowspan="1" colspan="1">Body</td>
+            </tr>
+          </tbody>
+        </table>
+      </table-wrap>
+      <table-wrap id="orange" position="float" xml:lang="">
+        <caption>
+          <title>I want to be orange.</title>
+        </caption>
+        <table>
+          <colgroup>
+            <col align="left" span="1"/>
+          </colgroup>
+          <thead>
+            <tr>
+              <td align="left" rowspan="1" colspan="1">Head</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" rowspan="1" colspan="1">Body</td>
+            </tr>
+          </tbody>
+        </table>
+      </table-wrap>
+    </p>
+  </body>
+</article>
