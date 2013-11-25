@@ -4,10 +4,10 @@
     version="3.0"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
-<xsl:import href="../jats-xslfo.xsl" />
+<xsl:import href="../../xsl/jats-xslfo.xsl" />
 
-<xsl:attribute-set name="tbody">
-  <xsl:attribute name="color" select="'blue'" />
+<xsl:attribute-set name="thead">
+  <xsl:attribute name="color" select="'red'" />
 </xsl:attribute-set>
 
 </xsl:stylesheet>
