@@ -10,7 +10,52 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xsl/table/red.xsl</String>
+                                    <String>xml/table-test/red-blue.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>table-test.xml to FO</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xml/table-test/red.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>table-test.xml to FO</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xml/table-test/orange.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>table-test.xml to FO</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xml/table-test/blue.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -40,12 +85,12 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xml/pone.0076984/pone.0076984.xml</String>
+                                    <String>xml/pone.0065808/pone.0065808.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>JATS to FO</String>
                                         <String>JATS to HTML</String>
+                                        <String>JATS to FO</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -57,12 +102,57 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xml/pone.0065808/pone.0065808.xml</String>
+                                    <String>xsl/table/red-blue.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>JATS to HTML</String>
+                                        <String>table-test.xml to FO</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/table/red.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>table-test.xml to FO</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xsl/table/blue.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>table-test.xml to FO</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xml/pone.0076984/pone.0076984.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
                                         <String>JATS to FO</String>
+                                        <String>JATS to HTML</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -420,7 +510,7 @@
                                     <String-array/>
                                 </field>
                                 <field name="xslTransformer">
-                                    <String>Saxon-PE</String>
+                                    <String>Saxon-EE</String>
                                 </field>
                                 <field name="extensionURLs">
                                     <String-array/>
