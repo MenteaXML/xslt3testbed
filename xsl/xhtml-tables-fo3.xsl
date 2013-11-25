@@ -24,13 +24,30 @@
 <xsl:attribute-set name="fo:table" />
 
 <xsl:template match="table">
+  <xsl:param name="table-attributes"
+             as="attribute()*"
+             tunnel="yes" />
+
   <fo:table xsl:use-attribute-sets="table fo:table">
+    <xsl:sequence select="$table-attributes" />
     <xsl:apply-templates />
   </fo:table>
 </xsl:template>
 
 <xsl:template match="col">
-  <fo:table-column xsl:use-attribute-sets="col fo:table-column" />
+  <fo:table-column xsl:use-attribute-sets="col fo:table-column">
+    <xsl:apply-templates select="@*" />
+  </fo:table-column>
+</xsl:template>
+
+<xsl:template match="@align">
+  <xsl:attribute name="text-align" select="." />
+</xsl:template>
+
+<xsl:template match="@span[. eq '1']" />
+
+<xsl:template match="@span">
+  <xsl:attribute name="number-columns-repeated" select="." />
 </xsl:template>
 
 <xsl:template match="thead">
@@ -52,7 +69,8 @@
 </xsl:template>
 
 <xsl:template match="th">
-  <fo:table-cell xsl:use-attribute-sets="th fo:table-cell">
+  <fo:table-cell xsl:use-attribute-sets="th fo:table-cell"
+                 text-align="{(@align, 'from-table-column()')[1]}">
     <fo:block>
       <xsl:apply-templates />
     </fo:block>
@@ -60,7 +78,8 @@
 </xsl:template>
 
 <xsl:template match="td">
-  <fo:table-cell xsl:use-attribute-sets="td fo:table-cell">
+  <fo:table-cell xsl:use-attribute-sets="td fo:table-cell"
+                 text-align="{(@align, 'from-table-column()')[1]}">
     <fo:block>
       <xsl:apply-templates />
     </fo:block>
