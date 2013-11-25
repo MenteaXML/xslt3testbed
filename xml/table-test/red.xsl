@@ -7,7 +7,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="x3tb xs">
 
-<xsl:import href="../jats-xslfo.xsl" />
+<xsl:import href="../../xsl/jats-xslfo.xsl" />
 
 <xsl:function name="x3tb:red-thead" as="attribute()*">
   <xsl:param name="context" as="element()" />
