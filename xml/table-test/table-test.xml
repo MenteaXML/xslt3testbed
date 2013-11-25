@@ -27,7 +27,7 @@
   </front>
   <body>
     <p>
-      <table-wrap id="table1" position="float" xml:lang="">
+      <table-wrap id="table1" position="float">
         <caption>
           <title>1 head cell, 1 body cell.</title>
         </caption>
@@ -37,21 +37,21 @@
           </colgroup>
           <thead>
             <tr>
-              <td align="left" rowspan="1" colspan="1">Head</td>
+              <td rowspan="1" colspan="1">Head</td>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td align="left" rowspan="1" colspan="1">Body</td>
+              <td rowspan="1" colspan="1">Body</td>
             </tr>
           </tbody>
         </table>
       </table-wrap>
-      <table-wrap id="orange" position="float" xml:lang="">
+      <table-wrap id="orange" position="float">
         <caption>
           <title>I want to be orange.</title>
         </caption>
-        <table>
+        <table style="orange">
           <colgroup>
             <col align="left" span="1"/>
           </colgroup>
