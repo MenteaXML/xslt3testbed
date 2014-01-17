@@ -10,19 +10,15 @@
 <!-- Rely on imports to import main stylesheet. -->
 <xsl:import href="red-blue.xsl" />
 
-<xsl:function name="x3tb:orange-table" as="attribute()*">
-  <xsl:param name="context" as="element()" />
-
-  <xsl:attribute name="background-color" select="'orange'" />
-</xsl:function>
-
 <xsl:template match="table[@style eq 'orange']">
   <xsl:next-match>
     <xsl:with-param
         name="table-functions"
         as="map(xs:string, function(element()) as attribute()*)"
         select="map {
-                  'table' := x3tb:orange-table#1
+                  'table' := function($context as element()) as attribute()* {
+                               x3tb:attribute('background-color', 'orange')
+                             }
                 }"
         tunnel="yes" />
   </xsl:next-match>

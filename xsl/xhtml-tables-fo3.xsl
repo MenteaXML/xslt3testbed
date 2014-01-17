@@ -4,8 +4,9 @@
     version="3.0"
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+    xmlns:x3tb="https://github.com/MenteaXML/xslt3testbed"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="map xs">
+    exclude-result-prefixes="map x3tb xs">
 
 <xsl:variable
     name="default-table-functions"
@@ -39,6 +40,13 @@
                  function($c as element()) as attribute()*
                     {()}
          }"/>
+  
+<xsl:function name="x3tb:attribute" as="attribute()*">
+  <xsl:param name="name" as="xs:string" />
+  <xsl:param name="value" as="xs:string" />
+    
+  <xsl:attribute name="{$name}" select="$value" />
+</xsl:function>
 
 <xsl:template match="table">
   <xsl:param
@@ -49,7 +57,7 @@
   <xsl:variable
       name="use-table-functions"
       select="map:new(($default-table-functions, $table-functions))"
-      as="map(xs:string, function(*))" />
+      as="map(xs:string, function(*)*)" />
 
   <fo:table>
     <xsl:sequence select="$use-table-functions('table')(.)" />
