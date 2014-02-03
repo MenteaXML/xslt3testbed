@@ -9,19 +9,15 @@
 
 <xsl:import href="../../xsl/jats-xslfo.xsl" />
 
-<xsl:function name="x3tb:blue-tbody" as="attribute()*">
-  <xsl:param name="context" as="element()" />
-
-  <xsl:attribute name="color" select="'blue'" />
-</xsl:function>
-
 <xsl:template match="tbody">
   <xsl:next-match>
     <xsl:with-param
         name="table-functions"
         as="map(xs:string, function(element()) as attribute()*)"
         select="map {
-                  'tbody' := x3tb:blue-tbody#1
+                  'tbody' := function($context as element()) as attribute()* {
+                               x3tb:attribute('color', 'blue')
+                             }
                 }"
         tunnel="yes" />
   </xsl:next-match>
