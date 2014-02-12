@@ -70,7 +70,8 @@
 <!--                                                               -->
 <!--  CREATED FOR:                                                 -->
 <!--             Digital Archive of Journal Articles               -->
-<!--             National Center for Biotechnology Information (NCBI)     -->
+<!--             National Center for Biotechnology Information     -->
+<!--                (NCBI)                                         -->
 <!--             National Library of Medicine (NLM)                -->
 <!--                                                               -->
 <!--  CREATED BY:                                                  -->
@@ -87,15 +88,14 @@
 
     We request only that the NLM is cited as the source of the work.
 
-    Although all reasonable efforts have been taken to ensure the
-    accuracy and reliability of the software and data, the NLM and the
-    U.S. Government do not and cannot warrant the performance or
-    results that may be obtained by using this software or data. The
-    NLM and the U.S. Government disclaim all warranties, express or
-    implied, including warranties of performance, merchantability or
-    fitness for any particular purpose.
--->
-<!-- ============================================================= -->
+    Although all reasonable efforts have been taken to ensure the accuracy and
+    reliability of the software and data, the NLM and the U.S. Government  do
+    not and cannot warrant the performance or results that may be obtained  by
+    using this software or data. The NLM and the U.S. Government disclaim all
+    warranties, express or implied, including warranties of performance,
+    merchantability or fitness for any particular purpose.
+  -->
+  <!-- ============================================================= -->
 
 <!-- ============================================================= -->
 <!--             CHANGE HISTORY                                    -->
@@ -174,11 +174,11 @@ CHANGES TO NLM JATS v3.0 stylesheet        (wap) v1.0 (2009-12-08)
      stylesheet. -->
 
 
-<xsl:param name="mathml-support" select="true()"/>
-<!-- If mathml-support is turned off, MathML will be removed from the
-     output (while its content is passed through). This allows the
-     stylesheet to be used with an XSL-FO engine that does not support
-     MathML (while also disabling MathML, of course -->
+  <xsl:param name="mathml-support" select="true()"/>
+  <!-- If mathml-support is turned off, MathML will be removed from
+       the output (while its content is passed through). This allows
+       the stylesheet to be used with an XSL-FO engine that does not
+       support MathML (while also disabling MathML, of course). -->
 
 
 <xsl:param name="base-dir" select="false()"/>
