@@ -29,6 +29,16 @@
              tunnel="yes" />
 
   <fo:table xsl:use-attribute-sets="table fo:table">
+    <xsl:if
+        test="@rules = ('groups', 'rows', 'cols', 'all') and
+              (empty((@border, @frame)) or
+               @border = '0' or
+               exists(@frame) and not(@frame = ('box', 'border')))">
+      <xsl:attribute name="border-collapse">collapse</xsl:attribute>
+      <xsl:if test="empty((@border, @frame))">
+        <xsl:attribute name="border-style">hidden</xsl:attribute>
+      </xsl:if>
+    </xsl:if>
     <xsl:sequence select="$table-attributes" />
     <xsl:apply-templates />
   </fo:table>
