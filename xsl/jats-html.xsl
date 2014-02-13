@@ -110,8 +110,11 @@ or pipeline) parameterized.
 <xsl:stylesheet version="3.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:map="http://www.w3.org/2005/xpath-functions/map"
   xmlns:mml="http://www.w3.org/1998/Math/MathML"
-  exclude-result-prefixes="xlink mml">
+  xmlns:x3tb="https://github.com/MenteaXML/xslt3testbed"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  exclude-result-prefixes="xlink map mml x3tb xs">
 
 
   <!--<xsl:output method="xml" indent="no" encoding="UTF-8"
@@ -2579,8 +2582,89 @@ or pipeline) parameterized.
         through                                                      -->
   
   
-  <xsl:template match="table | thead | tbody | tfoot |
-      col | colgroup | tr | th | td">
+  <xsl:template match="table">
+    <xsl:variable name="cols" as="map(*)*">
+      <xsl:for-each select="col | colgroup/col">
+        <xsl:sequence select="map:entry(position(), .)" />
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="col-map" as="map(xs:integer, element(col))"
+                  select="map:new($cols)" />
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="table-copy"/>
+      <xsl:call-template name="named-anchor"/>
+      <xsl:apply-templates>
+        <xsl:with-param name="col-map" select="$col-map" as="map(xs:integer, element(col))" />
+      </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="thead | tbody | tfoot">
+    <xsl:param name="col-map" as="map(xs:integer, element(col))" />
+    <xsl:variable name="cell-map"
+                  select="map:new(for $i in 1 to count(map:keys($col-map))
+                                    return map:entry($i, 0))"
+                  as="map(xs:integer, xs:integer)" />
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="table-copy"/>
+      <xsl:call-template name="named-anchor"/>
+      <xsl:apply-templates>
+        <xsl:with-param name="cell-map" select="$cell-map"
+                        as="map(xs:integer, xs:integer)?" />
+      </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="tr">
+    <xsl:param name="cell-map" as="map(xs:integer, xs:integer)?" />
+    <xsl:message select="('row', count(map:keys($cell-map)))"/>
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="table-copy"/>
+      <!--<xsl:call-template name="named-anchor"/>-->
+      <xsl:iterate select="1 to count(map:keys($cell-map))">
+        <xsl:param name="colnum" select="1" as="xs:integer" />
+        <xsl:param name="cell-map" select="$cell-map" as="map(xs:integer, xs:integer)" />
+        <xsl:param name="cells" select="*" as="element()*" />
+
+  <xsl:message select="map:get($cell-map, .)"/>
+        <xsl:choose>
+          <xsl:when test="map:get($cell-map,.) > 0">
+            <xsl:message select="'rowspanned'"/>
+            <xsl:next-iteration>
+              <xsl:with-param name="colnum" select="$colnum + 1"/>
+              <xsl:with-param name="cell-map"
+                              select="map:new(($cell-map,
+                                               map:entry(., map:get($cell-map,.) - 1)))"
+                              as="map(xs:integer, xs:integer)" />
+              <xsl:with-param name="cells" select="$cells" as="element()*"/>
+            </xsl:next-iteration>
+          </xsl:when>
+          <xsl:when test="empty($cells)">
+            <xsl:message select="'no cell'"/>
+            <td/>
+            <xsl:next-iteration>
+              <xsl:with-param name="colnum" select="$colnum + 1"/>
+              <xsl:with-param name="cell-map" select="$cell-map" />
+              <xsl:with-param name="cells" select="()" as="element()*" />
+            </xsl:next-iteration>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:message select="concat('cell: ''', $cells[1]), '''; rowspan: ', string($cells[1]/@rowspan)"/>
+            <xsl:apply-templates select="$cells[1]" />
+            <xsl:next-iteration>
+              <xsl:with-param name="colnum" select="$colnum + 1"/>
+              <xsl:with-param name="cell-map"
+                              select="map:new(($cell-map,
+                                               map:entry(., xs:integer(($cells[1]/@rowspan, 1)[1]) - 1)))"/>
+              <xsl:with-param name="cells" select="$cells[position() > 1]"/>
+            </xsl:next-iteration>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:iterate>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="col | colgroup | th | td">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="table-copy"/>
       <xsl:call-template name="named-anchor"/>
